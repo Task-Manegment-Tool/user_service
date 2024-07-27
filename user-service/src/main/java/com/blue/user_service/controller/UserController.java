@@ -56,14 +56,22 @@ public class UserController {
     }
 
     @PostMapping("/register_user")
-    public ResponseEntity<UserRequestDto> userSave(@RequestBody UserRequestDto userRequestDto) {
+    public ResponseEntity<User> userSave(@RequestBody UserRequestDto userRequestDto) {
 
         logger.info("userSave method called");
-        userService.registerUser(userRequestDto);
-        return ResponseEntity.ok(userRequestDto);
+       User requestDto = userService.registerUser(userRequestDto);
+        return ResponseEntity.ok(requestDto);
     }
 
+    @GetMapping("/getuser/{userId}")
+    public ResponseEntity<User> findUserbyId(@PathVariable long userId) {
 
+        logger.info("findUserbyId method called ");
+
+        User user= userService.getUserbyId(userId);
+        return ResponseEntity.ok(user);
+
+    }
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {

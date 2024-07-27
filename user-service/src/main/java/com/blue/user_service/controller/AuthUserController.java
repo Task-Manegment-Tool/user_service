@@ -24,19 +24,13 @@ public class AuthUserController {
 
     Logger logger = Logger.getLogger(AuthUserController.class.getName());
 
-    @PostMapping("/getuser/{userId}")
-    public ResponseEntity<User> findUserbyId(@PathVariable long userId) {
 
-        logger.info("findUserbyId method called ");
-        User user= userService.getUserbyId(userId);
-        return ResponseEntity.ok(user);
-
-    }
 
     @PostMapping("/update_user/{userId}")
     public ResponseEntity<User> updateUserbyId(@PathVariable long userId, @RequestBody User user) {
 
     logger.info("updateUserbyId method called ");
+    user.setId(userId);
         userService.updateUserbyId(userId,user);
         return ResponseEntity.ok(user);
 

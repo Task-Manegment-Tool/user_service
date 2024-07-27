@@ -22,6 +22,7 @@
             User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
             Role role = user.getRole();
             List<SimpleGrantedAuthority> simpleGrantedAuthorities = Collections.singletonList(new SimpleGrantedAuthority(role.getName()));
+
             return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), simpleGrantedAuthorities);
         }
 

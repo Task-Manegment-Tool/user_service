@@ -1,10 +1,6 @@
 
-
 server:
-  port: 8762
-
-
-
+  port: 9002
 
 spring:
   application:
@@ -20,3 +16,7 @@ spring:
     show-sql: true
 
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka/
