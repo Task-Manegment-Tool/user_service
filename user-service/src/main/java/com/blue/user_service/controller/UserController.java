@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/public")
+@RequestMapping("/public/users")
 public class UserController {
 
 
@@ -36,6 +36,7 @@ public class UserController {
     private UserServiceImpl userService;
 
     Logger logger=Logger.getLogger(UserController.class.getName());
+
 
     @PostMapping("/login_user")
     public ResponseEntity<JwtResponse> loginUser(@RequestBody User user) {

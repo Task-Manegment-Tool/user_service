@@ -33,7 +33,7 @@ public class JwtHelper {
 
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
-      
+
         return claimsResolver.apply(claims);
     }
 
@@ -51,6 +51,7 @@ public class JwtHelper {
     //generate token for user
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("roles", userDetails.getAuthorities());
         return doGenerateToken(claims, userDetails.getUsername());
     }
 
@@ -63,9 +64,9 @@ public class JwtHelper {
     private String doGenerateToken(Map<String, Object> claims, String subject) {
 
         return Jwts.builder()
-        		.setClaims(claims)
-        		.setSubject(subject)
-        		.setIssuedAt(new Date(System.currentTimeMillis()))
+                .setClaims(claims)
+                .setSubject(subject)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
                 .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();

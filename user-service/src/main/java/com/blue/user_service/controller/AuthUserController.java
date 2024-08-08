@@ -32,6 +32,7 @@ public class AuthUserController {
     logger.info("updateUserbyId method called ");
     user.setId(userId);
         userService.updateUserbyId(userId,user);
+
         return ResponseEntity.ok(user);
 
     }
